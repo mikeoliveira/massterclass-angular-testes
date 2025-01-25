@@ -40,12 +40,6 @@ jobs:
       - name: Run tests with coverage
         run: npm run test -- --code-coverage --watch=false
 
-      - name: Clean gh-pages branch
-        run: |
-          git fetch origin gh-pages
-          git checkout gh-pages
-          git reset --hard origin/gh-pages
-
       - name: Upload coverage to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.3
         with:
