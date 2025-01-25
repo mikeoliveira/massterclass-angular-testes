@@ -36,3 +36,12 @@ jobs:
         with:
           build: npm run build
           start: npm start
+
+      - name: Run tests with coverage
+        run: npm run test -- --code-coverage --watch=false
+
+      - name: Upload coverage to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.3
+        with:
+          branch: gh-pages  # Branch onde você deseja hospedar o GitHub Pages
+          folder: coverage  # Pasta onde o relatório de cobertura foi gerado
