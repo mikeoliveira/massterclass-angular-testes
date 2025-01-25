@@ -42,27 +42,3 @@ jobs:
 
       - name: Generate coverage report
         run: npm run build --prod
-
-      - name: Deploy coverage to GitHub Pages
-        env:
-          GH_TOKEN: ${{ secrets.GIT_TOKEN }}  # Usando o token como variável de ambiente
-        run: |
-          # Cria o diretório de deploy
-          mkdir gh-pages
-          
-          # Copia os arquivos da cobertura para o diretório de deploy
-          cp -r ./coverage/* ./gh-pages/
-          
-          # Configura o git para usar o repositório correto com autenticação
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git config --global url."https://${GIT_TOKEN}@github.com".insteadOf "https://github.com"
-
-          # Comita os arquivos e faz o push
-          cd gh-pages
-          git init
-          git remote add origin https://github.com/mikeoliveira/massterclass-angular-testes.git
-          git checkout -b gh-pages
-          git add .
-          git commit -m "Deploy coverage"
-          git push --force origin gh-pages
